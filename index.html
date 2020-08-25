@@ -8,24 +8,23 @@
   </head>
 
   <body>
-
+    <header class="header grid">
+      <div class="header-left">High Score :<span id="high-score"></span></div>
+      <div class="header-right">Timer :<span id="timer-counter">5</span></div>
+    </header>
     <div class="container">
-        <div id="question-container" class="hide">
-            <div id="question">Question</div>
-            <div id="answer-btns" class="btn-grid">
-                <button class="btn">Answer 1</button>
-                <button class="btn">Answer 2</button>
-                <button class="btn">Answer 3</button>
-                <button class="btn">Answer 4</button>
-            </div>
+        <div id="question-card" class="hide">
+          <div id="question">Question</div>
+          <div id="answer-display" class="btn-grid"></div>
         </div>
         <div class="controls">
-            <button id="start-btn" class="start-btn btn">Start</button>
-            <button id="next-btn" class="next-btn btn hide">Next</button>
+          <button id="start-btn" class="start-btn btn">Start</button>
+          <button id="next-btn" class="next-btn btn hide">Next</button>
         </div>
+        <div id="correct-label" class="hide">Test</div>
     </div>
 
 
-    <script src="./Assets/JS/script.js"></script>
+    <script src="./Assets/JS/javascript.js"></script>
   </body>
 </html>

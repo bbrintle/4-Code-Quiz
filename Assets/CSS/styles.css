@@ -3,14 +3,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-:root {
-    --hue-neutral: 200;
-    --hue-wrong: 0;
-    --hue-correct: 145;
-}
-
 body {
-    --hue: var(--hue-neutral);
     padding: 0;
     margin: 0;
     display: flex;
@@ -18,25 +11,47 @@ body {
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background-color: hsl(var(--hue), 100%, 20%);
+    background-color: skyblue;
 }
 
-body.correct {
-    --hue: var(--hue-correct);
+.header-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: left;
 }
 
-body.wrong{
-    --hue: var(--hue-wrong);
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: right;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin:20px 0;
+    font-size: larger;
+    font-weight: bolder;
 }
 
 .container {
     width: 800px;
     max-width: 80%;
-    background-color: white;
+    background-color: grey;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 0 10px 2px;
 }
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+}
+
 
 .btn-grid {
     display: grid;
@@ -46,9 +61,8 @@ body.wrong{
 }
 
 .btn{
-    --hue: var(--hue-neutral);
-    border: 1px solid hsl(var(--hue), 100%, 30%);
-    background-color: hsl(var(--hue), 100%, 50%);
+    border: 1px solid lightblue;
+    background-color: blue;
     border-radius: 5px;
     padding: 5px 10px;
     color: white;
@@ -57,15 +71,6 @@ body.wrong{
 
 .btn:hover{
     border-color: black;
-}
-
-.btn.correct {
-    --hue: var(--hue-correct);
-    color: black;
-}
-
-.btn.wrong {
-    --hue: var(--hue-wrong);
 }
 
 .start-btn, .next-btn {
@@ -78,6 +83,10 @@ body.wrong{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#correct-label{
+    padding-top: 5px;
 }
 
 .hide {
