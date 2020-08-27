@@ -6,6 +6,7 @@ var questionEle = document.getElementById('question');
 var answerDisplayEle = document.getElementById('answer-display');
 var correctDisplayEle = document.getElementById('correct-label');
 var timerCounterEle = document.getElementById('timer-counter');
+var timeCounterEle = document.getElementById('time-counter');
 var highScoreEle = document.getElementById('high-score');
 var getHighScore = localStorage.getItem("highScore");
 var scoreEle = document.getElementById('current-score');
@@ -39,7 +40,6 @@ function startQuiz(){
 function setNextQuestion(){
     resetCard();
     var currentScore = scoreEle.textContent;
-    var currentTime = timerCounterEle.textContent;
     if (currentQuestionIndex < questionArray.length){
         showQuestion(questionArray[currentQuestionIndex]);
     }else{
@@ -57,9 +57,17 @@ function showHighScoreInput(score){
     button.classList.add('btn');
     answerDisplayEle.appendChild(input);
     answerDisplayEle.appendChild(button);
-    let time = timerCounterEle.textContent
-    let userScore = parseInt(score) + (Math.floor(time / 10))
-    questionEle.innerText = "Your Score is " + userScore + ". Please enter name to save high score:"
+
+    let time = timerCounterEle.textContent;
+    let timeBonus = (Math.floor(time / 10));
+    let userScore = parseInt(score) + timeBonus;
+
+    if(timeBonus > 0){
+        questionEle.innerText = "Your Score is " + score + ". You got " + timeBonus + " bonus points for making good time! Please enter your username:";
+    } else {
+        questionEle.innerText = "Your Score is " + score + ". Please enter your username:";
+    }
+
     button.addEventListener("click", function(){
         let userInput = input.value;
         setHighScore(userScore, time, userInput);
@@ -77,7 +85,6 @@ function setHighScore(score, time, userInput){
     let checkScore = localStorage.getItem('highScore');
     if(checkScore >= newScore){
         //do nothing
-        console.log('testing');
     } else{
         localStorage.setItem("highScore", newScore); 
         localStorage.setItem("userName", userInput); 
@@ -98,13 +105,14 @@ function pullHighScore(){
     if(!setScore){
         setScore = highScoreEle.textContent
     } else{
-        highScoreEle.textContent = setScore;
+        highScoreEle.textContent = " " + setScore;
         userNameEle.textContent = " " + userName;
     }
 }
 
 //Reset the Question Card to blank
 function resetCard(){
+    timerCounterEle.classList.remove('error');
     nextButton.classList.add('hide');
     correctDisplayEle.classList.add('hide');
     //As long as there is a child attached to answerDisplayEle 
@@ -149,16 +157,16 @@ function selectAnswer(element){
     } else{
         resetCard();
         correctDisplayEle.classList.remove('hide');
-        correctDisplayEle.innerText = "Incorrect";
+        correctDisplayEle.innerText = "Incorrect.   -5 Secs";
         nextButton.classList.remove('hide');
+        timerCounterEle.classList.add('error');
         timePenalty();
     }
 }
 
 //Remove 5 seconds when function is called
 function timePenalty(){
-    let seconds = timerCounterEle.textContent;
-    timerCounterEle.textContent = parseInt(seconds) - 5;
+    totalSeconds = totalSeconds - 5
 }
 
 // This function is where the "time" aspect of the timer runs
@@ -192,7 +200,6 @@ function renderTime() {
         stopTimer();
         resetCard();
         var score = scoreEle.textContent;
-        var currentTime = timerCounterEle.textContent;
         showHighScoreInput(score);
     }
 }
