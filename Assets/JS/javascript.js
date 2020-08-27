@@ -40,6 +40,7 @@ function startQuiz(){
 function setNextQuestion(){
     resetCard();
     var currentScore = scoreEle.textContent;
+    
     if (currentQuestionIndex < questionArray.length){
         showQuestion(questionArray[currentQuestionIndex]);
     }else{
@@ -83,6 +84,7 @@ function showHighScoreInput(score){
 function setHighScore(score, time, userInput){
     let newScore = parseInt(score);
     let checkScore = localStorage.getItem('highScore');
+
     if(checkScore >= newScore){
         //do nothing
     } else{
@@ -91,6 +93,7 @@ function setHighScore(score, time, userInput){
         highScoreEle.textContent = newScore;
         userNameEle.textContent = userInput;
     }
+
     pullHighScore();
 }
 
@@ -132,9 +135,11 @@ function showQuestion(question){
         var button = document.createElement('button');
         button.innerText = possibleAnswer.text;
         button.classList.add('btn');
+
         if (possibleAnswer.correct) {
             button.dataset.correct = possibleAnswer.correct;
         }
+
         button.addEventListener('click', selectAnswer);
         answerDisplayEle.appendChild(button);
     });
@@ -196,6 +201,7 @@ function setTime() {
 // Display time and check to see if time is up. If time is up, display the HighScore Page (showHighScoreInput)
 function renderTime() {
     timerCounterEle.textContent = totalSeconds;
+
     if (totalSeconds <= 0) {  
         stopTimer();
         resetCard();
@@ -211,11 +217,7 @@ function stopTimer(){
 //Make sure that if page is refreshed, the highscore is still displayed
 pullHighScore();  
 
-//ToDo:
-//when timer hits 10 seconds, numbers turn red and enlarge
-
-
-
+//List of questions to be provided
 var questionArray = [
     {
     question: 'Who killed Qui-Gon Jinn?',
