@@ -6,6 +6,11 @@ var questionEle = document.getElementById('question');
 var answerDisplayEle = document.getElementById('answer-display');
 var correctDisplayEle = document.getElementById('correct-label');
 var timerCounterEle = document.getElementById('timer-counter');
+var highScoreEle = document.getElementById('high-score');
+var getHighScore = localStorage.getItem("highScore");
+var scoreEle = document.getElementById('current-score');
+var userNameEle = document.getElementById('user-name');
+
 
 // currentQuestionIndex will identify the question within the array "questionArray"
 var currentQuestionIndex;
@@ -20,6 +25,7 @@ startButton.addEventListener('click', startQuiz);
 nextButton.addEventListener('click', function(){
     currentQuestionIndex++;
     setNextQuestion();
+    startTimer();
 });
 
 //Star the Quiz
@@ -33,7 +39,62 @@ function startQuiz(){
 //Pull reset card and next question
 function setNextQuestion(){
     resetCard();
-    showQuestion(questionArray[currentQuestionIndex]);
+    var currentScore = scoreEle.textContent;
+    var currentTime = timerCounterEle.textContent;
+    if (currentQuestionIndex < questionArray.length){
+        showQuestion(questionArray[currentQuestionIndex]);
+    }else{
+        showHighScoreInput(currentScore)
+    }
+}
+
+//Create a Username Input display that shows the users score and allows them to enter username
+//User name and score will be entered into High Score if score beats the current high score
+function showHighScoreInput(score){
+    clearInterval(interval);
+    console.log("I should stop now")
+    var input = document.createElement('input');
+    var button = document.createElement('button');
+    button.innerText = "Submit";
+    button.classList.add('btn');
+    answerDisplayEle.appendChild(input);
+    answerDisplayEle.appendChild(button);
+    questionEle.textContent = "Your Score is " + score + ". Please enter name to save high score:"
+    button.addEventListener("click", function(){
+        let userInput = input.value;
+        setHighScore(scoreEle.textContent, timerCounterEle.textContent, userInput);
+    })
+}
+
+//Gathers score, time, and username. Checks if user has high score then assigns to local storage and calls display
+function setHighScore(score, time, userInput){
+    let newScore = parseInt(score);
+    let checkScore = localStorage.getItem('highScore');
+    if(checkScore > newScore){
+        //do nothing
+    } else{
+        localStorage.setItem("highScore", newScore); 
+        localStorage.setItem("userName", userInput); 
+        highScoreEle.textContent = newScore;
+        userNameEle.textContent = userInput;
+    }
+    pullHighScore();
+}
+
+//Pull info from local storage and display it on site
+function pullHighScore(){
+    //pull the highscore from local storage and display it in highscore
+    let setScore = localStorage.getItem("highScore");
+    let userName = localStorage.getItem('userName');
+
+    //This sets the local storage for high score. If a refresh happens, this will check
+    //to make sure the correct high score is showing and does not reset back to 0.
+    if(!setScore){
+        setScore = highScoreEle.textContent
+    } else{
+        highScoreEle.textContent = setScore;
+        userNameEle.textContent = " " + userName;
+    }
 }
 
 //Reset the Question Card to blank
@@ -69,81 +130,77 @@ function showQuestion(question){
 function selectAnswer(element){
     var selectedButton = element.target;
     var isCorrect = selectedButton.dataset.correct;
+    var scoreEle = document.getElementById('current-score');
+    var score = scoreEle.textContent;
+    
     if(isCorrect){
+        resetCard();
         correctDisplayEle.classList.remove('hide');
         correctDisplayEle.innerText = "Correct!";
+        score++;
+        scoreEle.textContent = score;
         nextButton.classList.remove('hide');
     } else{
-
-        //remove 5 seconds
-    
+        resetCard();
         correctDisplayEle.classList.remove('hide');
         correctDisplayEle.innerText = "Incorrect";
         nextButton.classList.remove('hide');
+        timePenalty();
     }
+}
+
+//Remove 5 seconds when function is called
+function timePenalty(){
+    let seconds = timerCounterEle.textContent;
+    timerCounterEle.textContent = parseInt(seconds) - 5;
 }
 
 
 
-
-//Set the timer
 // This function is where the "time" aspect of the timer runs
 // Notice no settings are changed other than to increment the secondsElapsed var
 function startTimer() {
     setTime();
-  
+
     // We only want to start the timer if totalSeconds is > 0
     if (totalSeconds > 0) {
       /* The "interval" variable here using "setInterval()" begins the recurring increment of the
-         secondsElapsed variable which is used to check if the time is up */
+         totalSeconds variable which is used to check if the time is up */
         interval = setInterval(function() {
-          totalSeconds--;
-  
-          // So renderTime() is called here once every second.
-          renderTime();
+            totalSeconds--; 
+            renderTime();
         }, 1000);
     } else {
-      alert("Minutes of work/rest must be greater than 0.")
+        //This should never activate
+        alert("You have run out of time")
     }
 }
 
-/* This function retrieves the values from the html input elements; Sort of
-getting run in the background, it sets the totalSeconds variable which
-is used in getFormattedMinutes/Seconds() and the renderTime() function.
-It essentially resets our timer */
 function setTime() {
     totalSeconds = timerCounterEle.textContent;
     clearInterval(interval);
 }
 
-// This function does 2 things. displays the time and checks to see if time is up.
+// Display time and check to see if time is up. If time is up, display the HighScore Page (showHighScoreInput)
 function renderTime() {
-    // When renderTime is called it sets the textContent for the timer html...
     timerCounterEle.textContent = totalSeconds;
-  
-   // ..and then checks to see if the time has run out
     if (totalSeconds <= 0) {  
-      stopTimer();
+        stopTimer();
+        resetCard();
+        var score = scoreEle.textContent;
+        var currentTime = timerCounterEle.textContent;
+        showHighScoreInput(score);
     }
 }
 
-/* This function stops the interval and also resets secondsElapsed
-and calls "setTime()" which effectively reset the timer
-to the input selections workMinutesInput.value and restMinutesInput.value */
-function stopTimer() {
-    setTime();
-    renderTime();
+function stopTimer(){
+    clearInterval(interval);
 }
-  
-  
 
+//Make sure that if page is refreshed, the highscore is still displayed
+pullHighScore();  
 
-
-
-//Assign a High Score and Username to the Browser to be saved upon refresh
-
-//Once timer reaches 0, quiz is over and getUserInfo function is called
-
+//ToDo:
 //when timer hits 10 seconds, numbers turn red and enlarge
 
 
