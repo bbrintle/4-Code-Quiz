@@ -268,7 +268,7 @@ var questionArray = [
 {
     question: 'Who are the only two characters who appear in ever Star Wars movie?',
     answers: [
-        { text: 'C3P0 / R2D2', correct: true},
+        { text: 'C-3P0 / R2-D2', correct: true},
         { text: 'Luke / Leia', correct: false },
         { text: 'Darth Vader / Emperor Palpatine', correct: false },
         { text: "Han Solo / Chewbacca", correct: false }
@@ -299,6 +299,60 @@ var questionArray = [
         { text: 'Sylvester Stallone', correct: false },
         { text: 'Harrison Ford', correct: true },
         { text: 'Mark Hamill', correct: false }
+    ]
+},
+{
+    question: "What were Luke's aunt and uncle's job on Tatooine?",
+    answers: [
+        { text: 'Blue Milk Farmer', correct: false},
+        { text: 'Driod Repair', correct: false },
+        { text: 'Moisture Farmer', correct: true },
+        { text: 'Womp Rat Farmer', correct: false }
+    ]
+},
+{
+    question: "In how many languages is C-3P0 fluent?",
+    answers: [
+        { text: 'More than 6 Million', correct: true},
+        { text: 'Over 9000', correct: false },
+        { text: '3720', correct: false },
+        { text: "C-3P0 can't talk...", correct: false }
+    ]
+},
+{
+    question: "What is the Wookiee's home world?",
+    answers: [
+        { text: 'Yavin 4', correct: false},
+        { text: 'Dantooine', correct: false },
+        { text: 'Alderan', correct: false },
+        { text: "Kashyyyk", correct: true }
+    ]
+},
+{
+    question: "What is the name of Boba Fett's ship?",
+    answers: [
+        { text: 'Millenium Falcon', correct: false},
+        { text: 'Salve 1', correct: true },
+        { text: 'Chimaera', correct: false },
+        { text: "The Ghost", correct: false }
+    ]
+},
+{
+    question: "Who is the creator of Star Wars?",
+    answers: [
+        { text: 'Steven Spielberg', correct: false},
+        { text: 'Robert Zemeckis', correct: false },
+        { text: 'George Lucus', correct: true },
+        { text: "John Hughes", correct: false }
+    ]
+},
+{
+    question: "Where was Luke Skywalker originally headed to pick up power converters?",
+    answers: [
+        { text: 'Mos Eisley', correct: false},
+        { text: 'Black Spire Outpost', correct: false },
+        { text: 'Tosche Station', correct: true },
+        { text: "Oga's Cantina", correct: false }
     ]
 },
 {
