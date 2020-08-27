@@ -51,17 +51,23 @@ function setNextQuestion(){
 //User name and score will be entered into High Score if score beats the current high score
 function showHighScoreInput(score){
     clearInterval(interval);
-    console.log("I should stop now")
     var input = document.createElement('input');
     var button = document.createElement('button');
     button.innerText = "Submit";
     button.classList.add('btn');
     answerDisplayEle.appendChild(input);
     answerDisplayEle.appendChild(button);
-    questionEle.textContent = "Your Score is " + score + ". Please enter name to save high score:"
+    let time = timerCounterEle.textContent
+    let userScore = parseInt(score) + (Math.floor(time / 10))
+    questionEle.innerText = "Your Score is " + userScore + ". Please enter name to save high score:"
     button.addEventListener("click", function(){
         let userInput = input.value;
-        setHighScore(scoreEle.textContent, timerCounterEle.textContent, userInput);
+        setHighScore(userScore, time, userInput);
+        resetCard();
+        startButton.classList.remove('hide');
+        questionCard.classList.add('hide');
+        timerCounterEle.textContent = "75";
+        scoreEle.textContent = "0";
     })
 }
 
@@ -69,8 +75,9 @@ function showHighScoreInput(score){
 function setHighScore(score, time, userInput){
     let newScore = parseInt(score);
     let checkScore = localStorage.getItem('highScore');
-    if(checkScore > newScore){
+    if(checkScore >= newScore){
         //do nothing
+        console.log('testing');
     } else{
         localStorage.setItem("highScore", newScore); 
         localStorage.setItem("userName", userInput); 
@@ -154,8 +161,6 @@ function timePenalty(){
     timerCounterEle.textContent = parseInt(seconds) - 5;
 }
 
-
-
 // This function is where the "time" aspect of the timer runs
 // Notice no settings are changed other than to increment the secondsElapsed var
 function startTimer() {
@@ -221,6 +226,69 @@ var questionArray = [
         { text: 'Darth Vader', correct: true },
         { text: 'Count Dooku', correct: false },
         { text: 'General Greivous', correct: false }
+    ]
+},
+{
+    question: 'What species is Jabba?',
+    answers: [
+        { text: 'Ithorian', correct: false},
+        { text: 'Hutt', correct: true },
+        { text: 'Jawa', correct: false },
+        { text: "Twi'lek", correct: false }
+    ]
+},
+{
+    question: 'Which order brought about the death of the Jedi?',
+    answers: [
+        { text: 'Order 55', correct: false},
+        { text: 'Order 88', correct: false },
+        { text: 'Order 66', correct: true },
+        { text: "Order 77", correct: false }
+    ]
+},
+{
+    question: 'What is the name of the actress who played Princess Leia?',
+    answers: [
+        { text: 'Gillian Anderson', correct: false},
+        { text: 'Sigourney Weaver', correct: false },
+        { text: 'Linda Hamilton', correct: false },
+        { text: "Carrie Fisher", correct: true }
+    ]
+},
+{
+    question: 'Who are the only two characters who appear in ever Star Wars movie?',
+    answers: [
+        { text: 'C3P0 / R2D2', correct: true},
+        { text: 'Luke / Leia', correct: false },
+        { text: 'Darth Vader / Emperor Palpatine', correct: false },
+        { text: "Han Solo / Chewbacca", correct: false }
+    ]
+},
+{
+    question: 'On which planet do we first meet Rey in The Force Awakens?',
+    answers: [
+        { text: 'Tattoine', correct: false},
+        { text: 'Jakku', correct: true },
+        { text: 'Coruscant', correct: false },
+        { text: 'Mustafar', correct: false }
+    ]
+},
+{
+    question: 'Which furry species lives on the forest moon of Endor?',
+    answers: [
+        { text: 'Ewoks', correct: true},
+        { text: 'Wookiees', correct: false },
+        { text: 'Hutts', correct: false },
+        { text: 'Jawas', correct: false }
+    ]
+},
+{
+    question: 'Who originally played Han Solo?',
+    answers: [
+        { text: 'Mel Gibson', correct: false},
+        { text: 'Sylvester Stallone', correct: false },
+        { text: 'Harrison Ford', correct: true },
+        { text: 'Mark Hamill', correct: false }
     ]
 },
 {
