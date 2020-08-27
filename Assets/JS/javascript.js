@@ -32,6 +32,7 @@ nextButton.addEventListener('click', function(){
 function startQuiz(){
     currentQuestionIndex = 0;
     startButton.classList.add('hide');
+    shuffledQuestions = questionArray.sort(() => Math.random() - .5);
     setNextQuestion();
     startTimer();
 }
@@ -42,7 +43,7 @@ function setNextQuestion(){
     var currentScore = scoreEle.textContent;
 
     if (currentQuestionIndex < questionArray.length){
-        showQuestion(questionArray[currentQuestionIndex]);
+        showQuestion(shuffledQuestions[currentQuestionIndex]);
     }else{
         showHighScoreInput(currentScore)
     }
