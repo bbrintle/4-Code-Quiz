@@ -25,7 +25,6 @@ startButton.addEventListener('click', startQuiz);
 nextButton.addEventListener('click', function(){
     currentQuestionIndex++;
     setNextQuestion();
-    startTimer();
 });
 
 //Star the Quiz
