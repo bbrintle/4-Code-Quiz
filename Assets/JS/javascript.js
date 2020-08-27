@@ -40,7 +40,7 @@ function startQuiz(){
 function setNextQuestion(){
     resetCard();
     var currentScore = scoreEle.textContent;
-    
+
     if (currentQuestionIndex < questionArray.length){
         showQuestion(questionArray[currentQuestionIndex]);
     }else{
@@ -169,9 +169,9 @@ function selectAnswer(element){
     }
 }
 
-//Remove 5 seconds when function is called
+//Remove 4 seconds when function is called
 function timePenalty(){
-    totalSeconds = totalSeconds - 5
+    totalSeconds = totalSeconds - 4
 }
 
 // This function is where the "time" aspect of the timer runs
