@@ -30,3 +30,5 @@
 * Got to the 
 <a href="https://bbrintle.github.io/4-Code-Quiz/">Code Quiz</a>
 <img src="./Assets/Images/MainScreen.PNG">
+<img src="./Assets/Images/QuizScreen.PNG">
+<img src="./Assets/Images/GameOverScreen.PNG">
