@@ -95,6 +95,8 @@ function selectAnswer(element){
         score++;
         scoreEle.textContent = score;
         nextButton.classList.remove('hide');
+        var acceptSound = new Audio("./Assets/Sound/accept.mp3");
+        acceptSound.play();
     } else{
         resetCard();
         correctDisplayEle.classList.remove('hide');
