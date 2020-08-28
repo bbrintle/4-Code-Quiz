@@ -26,3 +26,7 @@
 * Timer will turn red after it has lost 5 seconds to give a better visual to the user
 * "Victory" sound plays when correct answer is selected
 * "Wrong" sound plays when incorrect answer is selected
+
+* Got to the 
+<a href="https://bbrintle.github.io/4-Code-Quiz/">Code Quiz</a>
+<img src="./Assets/Images/MainScreen.PNG">
