@@ -270,7 +270,7 @@ var questionArray = [
     ]
 },
 {
-    question: 'Who are the only two characters who appear in ever Star Wars movie?',
+    question: 'Who are the only two characters who appear in every Star Wars movie?',
     answers: [
         { text: 'C-3P0 / R2-D2', correct: true},
         { text: 'Luke / Leia', correct: false },
@@ -360,7 +360,7 @@ var questionArray = [
     ]
 },
 {
-    question: 'Who killed Lukes father??',
+    question: "Who killed Luke's father?",
     answers: [
         { text: 'Darth Maul', correct: false},
         { text: 'Darth Vader', correct: true },
