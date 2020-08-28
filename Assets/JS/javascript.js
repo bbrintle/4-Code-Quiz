@@ -18,7 +18,6 @@ var currentQuestionIndex;
 var shuffledQuestions;
 var interval;
 var totalSeconds = 0;
-var wrongSound;
 
 //Start quiz when start button is clicked
 startButton.addEventListener('click', startQuiz);
@@ -109,7 +108,7 @@ function selectAnswer(element){
 //Remove 4 seconds and play wrong answer sound when function is called
 function timePenalty(){
     totalSeconds = totalSeconds - 4
-    wrongSound = new Audio("wrong.mp3");
+    var wrongSound = new Audio("./Assets/Sound/wrong.mp3");
     wrongSound.play();
 }
 
