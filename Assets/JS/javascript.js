@@ -50,6 +50,69 @@ function setNextQuestion(){
     }
 }
 
+//Reset the Question Card to blank
+function resetCard(){
+    timerCounterEle.classList.remove('error');
+    nextButton.classList.add('hide');
+    correctDisplayEle.classList.add('hide');
+    //As long as there is a child attached to answerDisplayEle 
+    //this loop will continue to remove it until there are none.
+    while (answerDisplayEle.firstChild){
+        answerDisplayEle.removeChild(answerDisplayEle.firstChild)
+    }
+}
+
+//Provide all buttons set-up with answer and provide question
+function showQuestion(question){
+    questionEle.innerText = question.question;
+    questionCard.classList.remove('hide');
+
+    //loop through each answer and create a button for it and add to answerDisplayEle
+    question.answers.forEach(possibleAnswer => {
+        var button = document.createElement('button');
+        button.innerText = possibleAnswer.text;
+        button.classList.add('btn');
+
+        if (possibleAnswer.correct) {
+            button.dataset.correct = possibleAnswer.correct;
+        }
+
+        button.addEventListener('click', selectAnswer);
+        answerDisplayEle.appendChild(button);
+    });
+}
+
+//When an answer button is selected, inform the user of a right or wrong answer
+function selectAnswer(element){
+    var selectedButton = element.target;
+    var isCorrect = selectedButton.dataset.correct;
+    var scoreEle = document.getElementById('current-score');
+    var score = scoreEle.textContent;
+    
+    if(isCorrect){
+        resetCard();
+        correctDisplayEle.classList.remove('hide');
+        correctDisplayEle.innerText = "Correct!";
+        score++;
+        scoreEle.textContent = score;
+        nextButton.classList.remove('hide');
+    } else{
+        resetCard();
+        correctDisplayEle.classList.remove('hide');
+        correctDisplayEle.innerText = "Incorrect.   -5 Secs";
+        nextButton.classList.remove('hide');
+        timerCounterEle.classList.add('error');
+        timePenalty();
+    }
+}
+
+//Remove 4 seconds and play wrong answer sound when function is called
+function timePenalty(){
+    totalSeconds = totalSeconds - 4
+    wrongSound = new Audio("wrong.mp3");
+    wrongSound.play();
+}
+
 //Create a Username Input display that shows the users score and allows them to enter username
 //User name and score will be entered into High Score if score beats the current high score
 function showHighScoreInput(score){
@@ -113,69 +176,6 @@ function pullHighScore(){
         highScoreEle.textContent = " " + setScore;
         userNameEle.textContent = " " + userName;
     }
-}
-
-//Reset the Question Card to blank
-function resetCard(){
-    timerCounterEle.classList.remove('error');
-    nextButton.classList.add('hide');
-    correctDisplayEle.classList.add('hide');
-    //As long as there is a child attached to answerDisplayEle 
-    //this loop will continue to remove it until there are none.
-    while (answerDisplayEle.firstChild){
-        answerDisplayEle.removeChild(answerDisplayEle.firstChild)
-    }
-}
-
-//Provide all buttons set-up with answer and provide question
-function showQuestion(question){
-    questionEle.innerText = question.question;
-    questionCard.classList.remove('hide');
-
-    //loop through each answer and create a button for it and add to answerDisplayEle
-    question.answers.forEach(possibleAnswer => {
-        var button = document.createElement('button');
-        button.innerText = possibleAnswer.text;
-        button.classList.add('btn');
-
-        if (possibleAnswer.correct) {
-            button.dataset.correct = possibleAnswer.correct;
-        }
-
-        button.addEventListener('click', selectAnswer);
-        answerDisplayEle.appendChild(button);
-    });
-}
-
-//When an answer button is selected, inform the user of a right or wrong answer
-function selectAnswer(element){
-    var selectedButton = element.target;
-    var isCorrect = selectedButton.dataset.correct;
-    var scoreEle = document.getElementById('current-score');
-    var score = scoreEle.textContent;
-    
-    if(isCorrect){
-        resetCard();
-        correctDisplayEle.classList.remove('hide');
-        correctDisplayEle.innerText = "Correct!";
-        score++;
-        scoreEle.textContent = score;
-        nextButton.classList.remove('hide');
-    } else{
-        resetCard();
-        correctDisplayEle.classList.remove('hide');
-        correctDisplayEle.innerText = "Incorrect.   -5 Secs";
-        nextButton.classList.remove('hide');
-        timerCounterEle.classList.add('error');
-        timePenalty();
-    }
-}
-
-//Remove 4 seconds when function is called
-function timePenalty(){
-    totalSeconds = totalSeconds - 4
-    wrongSound = new sound("Wrong-answer-sound-effect.mp3");
-    wrongSound.play();
 }
 
 // This function is where the "time" aspect of the timer runs
