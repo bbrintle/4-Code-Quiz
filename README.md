@@ -3,7 +3,7 @@
 * root folder contains:
 
 * README.md      (Read Me File)
-* index.html     (Password Generator Page)
+* index.html     (Code Quiz Page)
 * \Assets\       (CSS and Images Folder)
 *   \JS\        (Folder that hold the javascript.js file)
 *   \CSS\       (Folder that holds CSS)
