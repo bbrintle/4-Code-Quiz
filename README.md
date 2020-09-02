@@ -1,4 +1,4 @@
-# Password Generator (Homework - 3)
+# Code Quiz (Homework - 4)
 
 * root folder contains:
 
