@@ -1,4 +1,4 @@
-# Code Quiz (Homework - 4)
+# Code Quiz
 
 Root folder contains:
 
