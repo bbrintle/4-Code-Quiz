@@ -1,4 +1,4 @@
-# Code Quiz
+# Star Wars Quiz
 
 Root folder contains:
 
